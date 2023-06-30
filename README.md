@@ -7,10 +7,10 @@
 ## PREVIEW
 ![](doc/preview.jpg)
 
-## BUILD
+## Install
 * go >= 1.19
 ```bash
-make build
+go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
 ```
 
 ## RUN
@@ -20,7 +20,13 @@ make build
 2. Run CLI(command line interface)
    * mysql `chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb` 
    * sqlite3 `chat2data --sqlite3=mytest.db`
+   * help `chat2data --help`
+   * with env `OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
 
+## BUILD
+```base
+make build
+```
 ## TODO
 - [ ] Support csv
 - [ ] Web ui
