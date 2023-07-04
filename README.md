@@ -28,8 +28,9 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
 make build
 ```
 ## TODO
-- [ ] Support csv
-- [ ] Web ui
+- [ ] Support Docker
+- [ ] Load csv
+- [ ] Add Web ui
 
 ## SPECIAL THANKS
 * [🦜️🔗 LangChain Go](https://github.com/tmc/langchaingo)
