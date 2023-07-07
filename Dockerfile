@@ -18,7 +18,7 @@ FROM alpine
 
 WORKDIR /app
 
-COPY --from=builder /src/bin ./
+COPY --from=builder /src/chat2data ./chat2data
 
 EXPOSE 8082
 
