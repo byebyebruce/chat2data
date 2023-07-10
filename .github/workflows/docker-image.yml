@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Image
+        run: |
+          docker build -t bailu1901/chat2data:latest .
+      - name: Login to Registry
+        run: docker login --username=${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Push Image
+        run: |
+          docker push bailu1901/chat2data:latest
