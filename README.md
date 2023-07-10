@@ -29,7 +29,8 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
 make build
 ```
 ## TODO
-- [ ] Support Docker
+- [x] Support Docker
+- [x] Support Postgre Database
 - [ ] Load csv
 - [ ] Add Web ui
 
@@ -37,3 +38,4 @@ make build
 * [🦜️🔗 LangChain Go](https://github.com/tmc/langchaingo)
 
 ![](https://hits.sh/github.com/byebyebruce/chat2data/doc/hits.svg?label=%F0%9F%91%80)
+

@@ -37,7 +37,7 @@ func main() {
 	} else if *mysqlDSN != "" {
 		chain, err = datachain.New(llm, mysql.EngineName, *mysqlDSN, *useAllTable)
 	} else if *pgxDSN != "" {
-		chain, err = datachain.New(llm, postgresql.EngineName, *mysqlDSN, *useAllTable)
+		chain, err = datachain.New(llm, postgresql.EngineName, *pgxDSN, *useAllTable)
 	} else {
 		log.Fatalf("no dsn")
 	}
