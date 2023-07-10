@@ -4,8 +4,13 @@
 
 > Use AI to chat to your mysql, postgre or sqlite3 database.
 
-## PREVIEW
+## Preview
 ![](doc/preview.jpg)
+
+## Quick Run(Docker)
+```bash
+docker run --rm -it -e OPENAI_API_KEY=xxx bailu1901/chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb
+```
 
 ## Install
 * go >= 1.19
@@ -13,7 +18,7 @@
 go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
 ```
 
-## RUN
+## Run
 1. Config environment variables 
    * Use local `.env` file `cp .env.template .env` then edit it.  
    * You can also use `export OPENAI_API_KEY=xxx` to specify the environment variables.
@@ -24,20 +29,15 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
    * help `chat2data --help`
    * with env `OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
 
-## BUILD
+## Build by source
+`git clone github.com/byebyebruce/chat2data`
+* build binary
 ```base
 make build
 ```
-
-## DOCKER
-1. build docker image
+* build docker image
 ```bash 
 docker build -t chat2data .
-```
-
-1. run
-```bash 
- docker run --rm -it -e OPENAI_API_KEY=xx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb
 ```
 
 ## TODO
@@ -46,7 +46,7 @@ docker build -t chat2data .
 - [ ] Load csv
 - [ ] Add Web ui
 
-## SPECIAL THANKS
+## Special Thanks
 * [🦜️🔗 LangChain Go](https://github.com/tmc/langchaingo)
 
 ![](https://hits.sh/github.com/byebyebruce/chat2data/doc/hits.svg?label=%F0%9F%91%80)
