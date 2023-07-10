@@ -19,7 +19,7 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
    * You can also use `export OPENAI_API_KEY=xxx` to specify the environment variables.
 2. Run CLI(command line interface)
    * mysql `chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb` 
-   * postgre `chat2data --postgre=root:pwd@tcp(localhost:3306)/mydb`
+   * postgre `chat2data --postgre=postgres://db_user:mysecretpassword@localhost:5438/test?sslmode=disable`
    * sqlite3 `chat2data --sqlite3=mytest.db`
    * help `chat2data --help`
    * with env `OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
@@ -28,6 +28,18 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
 ```base
 make build
 ```
+
+## DOCKER
+1. build docker image
+```bash 
+docker build -t chat2data .
+```
+
+1. run
+```bash 
+ docker run --rm -it -e OPENAI_API_KEY=xx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb
+```
+
 ## TODO
 - [x] Support Docker
 - [x] Support Postgre Database
