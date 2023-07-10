@@ -2,7 +2,7 @@
             <img src="https://readme-typing-svg.demolab.com/?lines=Chat+2+Data&size=50&height=80&center=true&vCenter=true&&duration=1000&pause=5000">
         </div>
 
-> Use AI to chat to your mysql database or sqlite3 database.
+> Use AI to chat to your mysql, postgre or sqlite3 database.
 
 ## PREVIEW
 ![](doc/preview.jpg)
@@ -19,6 +19,7 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
    * You can also use `export OPENAI_API_KEY=xxx` to specify the environment variables.
 2. Run CLI(command line interface)
    * mysql `chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb` 
+   * postgre `chat2data --postgre=root:pwd@tcp(localhost:3306)/mydb`
    * sqlite3 `chat2data --sqlite3=mytest.db`
    * help `chat2data --help`
    * with env `OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
