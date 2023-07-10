@@ -1,4 +1,6 @@
-FROM golang:1.19 AS builder
+FROM golang:1.19-alpine AS builder
+
+RUN apk add build-base
 
 ENV GOPROXY='https://goproxy.cn'
 
@@ -18,7 +20,7 @@ FROM alpine
 
 WORKDIR /app
 
-COPY --from=builder /src/bin ./
+COPY --from=builder /src/chat2data ./chat2data
 
 EXPOSE 8082
 
