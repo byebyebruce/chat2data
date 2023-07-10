@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 
 	"github.com/byebyebruce/chat2data/cmd"
@@ -21,10 +22,7 @@ var (
 func main() {
 	flag.Parse()
 
-	err := godotenv.Overload()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	godotenv.Overload()
 
 	llm, err := openai.NewChat()
 	if err != nil {
@@ -45,5 +43,7 @@ func main() {
 
 	defer chain.Close()
 
-	cmd.CLI(chain)
+	if err := cmd.CLI(chain); err != nil {
+		fmt.Println(err)
+	}
 }
