@@ -1,5 +1,7 @@
 FROM golang:1.19-alpine AS builder
 
+RUN apk add build-base
+
 ENV GOPROXY='https://goproxy.cn'
 
 WORKDIR /src
@@ -10,7 +12,7 @@ RUN go mod download
 COPY . .
 
 ENV GIT_COMMIT="unknown"
-RUN apk add build-base && make build
+RUN make build
 
 FROM alpine
 
