@@ -2,7 +2,7 @@
             <img src="https://readme-typing-svg.demolab.com/?lines=Chat+2+Data&size=50&height=80&center=true&vCenter=true&&duration=1000&pause=5000">
         </div>
 
-> Use AI to chat to your mysql, postgre or sqlite3 database.
+> Use AI to chat to your mysql, postgre, sqlite3 database or csv.
 
 ## Preview
 ![](doc/preview.jpg)
@@ -23,10 +23,11 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
    * Use local `.env` file `cp .env.template .env` then edit it.  
    * You can also use `export OPENAI_API_KEY=xxx` to specify the environment variables.
 2. Run CLI(command line interface)
+   * help `chat2data --help`
    * mysql `chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb` 
    * postgre `chat2data --postgre=postgres://db_user:mysecretpassword@localhost:5438/test?sslmode=disable`
    * sqlite3 `chat2data --sqlite3=mytest.db`
-   * help `chat2data --help`
+   * csv `chat2data --csv=csvfile.csv` or `chat2data --csv=csvdir`
    * with env `OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
 
 ## Build by source
@@ -43,7 +44,7 @@ docker build -t chat2data .
 ## TODO
 - [x] Support Docker
 - [x] Support Postgre Database
-- [x] Support csv
+- [x] Support load csv
 - [ ] Add Web ui
 
 ## [Change Log](CHANGELOG.md)
