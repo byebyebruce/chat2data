@@ -16,12 +16,12 @@ func CLI(chain *datachain.DataChain) error {
 		ctx1, cancel1 := context.WithTimeout(context.Background(), time.Minute*2)
 		defer cancel1()
 
-		answer, refTables, err := chain.Run(ctx1, str)
+		answer, err := chain.Run(ctx1, str)
 		if err != nil {
 			fmt.Println(color.RedString("error:%s", err))
 		} else {
 			fmt.Println(color.GreenString("Answer:\n"), color.GreenString(answer))
-			fmt.Println(color.GreenString("RefTables:\n"), color.GreenString("%v", refTables))
+			//fmt.Println(color.GreenString("RefTables:\n"), color.GreenString("%v", refTables))
 		}
 	}
 

@@ -43,11 +43,13 @@ docker build -t chat2data .
 ## TODO
 - [x] Support Docker
 - [x] Support Postgre Database
-- [ ] Load csv
+- [x] Support csv
 - [ ] Add Web ui
+
+## [Change Log](CHANGELOG.md)
 
 ## Special Thanks
 * [🦜️🔗 LangChain Go](https://github.com/tmc/langchaingo)
-
+ 
 ![](https://hits.sh/github.com/byebyebruce/chat2data/doc/hits.svg?label=%F0%9F%91%80)
 

@@ -92,10 +92,10 @@ func (c *DataChain) Close() error {
 	return c.SQLChain.Database.Close()
 }
 
-func (c *DataChain) Run(ctx context.Context, query string) (string, []string, error) {
+func (c *DataChain) Run(ctx context.Context, query string) (string, error) {
 	out, err := chains.Call(ctx, c, map[string]any{c.GetInputKeys()[0]: query})
 	if err != nil {
-		return "", nil, err
+		return "", err
 	}
-	return out[c.GetOutputKeys()[0]].(string), out["table_names_to_use"].([]string), nil
+	return out[c.GetOutputKeys()[0]].(string), nil
 }

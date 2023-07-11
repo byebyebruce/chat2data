@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
+	"path"
 
 	"github.com/byebyebruce/chat2data/cmd"
 	"github.com/byebyebruce/chat2data/datachain"
@@ -15,9 +17,10 @@ import (
 )
 
 var (
-	mysqlDSN    = flag.String("mysql", "root:pwd@tcp(localhost:3306)/mydb", "mysql dsn (e.g. user:pwd@tcp(localhost:3306)/test)")
+	mysqlDSN    = flag.String("mysql", "", "mysql dsn (e.g. user:pwd@tcp(localhost:3306)/test)")
 	sqlite3DSN  = flag.String("sqlite3", "", "sqlite3 dsn (e.g. test.db)")
 	pgxDSN      = flag.String("postgre", "", "postgre dsn (e.g. postgres://db_user:mysecretpassword@localhost:5438/test?sslmode=disable)")
+	csv         = flag.String("csv", "", "csv dir or file")
 	useAllTable = flag.Bool("all", true, "use all table or choose by question")
 )
 
@@ -38,6 +41,15 @@ func main() {
 		chain, err = datachain.New(llm, mysql.EngineName, *mysqlDSN, *useAllTable)
 	} else if *pgxDSN != "" {
 		chain, err = datachain.New(llm, postgresql.EngineName, *pgxDSN, *useAllTable)
+	} else if *csv != "" {
+		dbFile := path.Join(os.TempDir(), "chat2data.db")
+		os.Remove(dbFile)
+		defer os.Remove(dbFile)
+		err = cmd.Load(dbFile, *csv)
+		if err != nil {
+			log.Fatalf("load csv err: %s", err)
+		}
+		chain, err = datachain.New(llm, sqlite3.EngineName, dbFile, *useAllTable)
 	} else {
 		log.Fatalf("no dsn")
 	}
