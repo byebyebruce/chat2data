@@ -14,8 +14,8 @@ import (
 	"github.com/tmc/langchaingo/tools/sqldatabase/sqlite3"
 )
 
-// Load load csv to sqlite3 database
-func Load(dsn string, dirOrFile string) error {
+// LoadCSV load csv to sqlite3 database
+func LoadCSV(dsn string, dirOrFile string) error {
 	db, err := sql.Open(sqlite3.EngineName, dsn)
 	if err != nil {
 		return err

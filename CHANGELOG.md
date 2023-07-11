@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.2.0 - 2023-07-10
+## v0.2.8 - 2023-07-11
 ### Features
 * add csv support
 ### Fixed

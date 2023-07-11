@@ -45,7 +45,7 @@ func main() {
 		dbFile := path.Join(os.TempDir(), "chat2data.db")
 		os.Remove(dbFile)
 		defer os.Remove(dbFile)
-		err = cmd.Load(dbFile, *csv)
+		err = cmd.LoadCSV(dbFile, *csv)
 		if err != nil {
 			log.Fatalf("load csv err: %s", err)
 		}
