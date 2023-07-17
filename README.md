@@ -29,6 +29,11 @@ go install github.com/byebyebruce/chat2data/cmd/chat2data@latest
    * sqlite3 `chat2data --sqlite3=mytest.db`
    * csv `chat2data --csv=csvfile.csv` or `chat2data --csv=csvdir`
    * with env `OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
+   * 
+3. Run Web UI
+   * mysql `chat2data --mysql="root:example@tcp(10.12.21.101:3306)/mydb" --web=8088`
+
+   * sqlite3 `chat2data --sqlite3=./mytest.db  --web=8088`
 
 ## Build by source
 `git clone github.com/byebyebruce/chat2data`

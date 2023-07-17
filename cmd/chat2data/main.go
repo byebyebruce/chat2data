@@ -22,6 +22,7 @@ var (
 	pgxDSN      = flag.String("postgre", "", "postgre dsn (e.g. postgres://db_user:mysecretpassword@localhost:5438/test?sslmode=disable)")
 	csv         = flag.String("csv", "", "csv dir or file")
 	useAllTable = flag.Bool("all", true, "use all table or choose by question")
+	web         = flag.String("web", "", "web ui port")
 )
 
 func main() {
@@ -59,7 +60,12 @@ func main() {
 
 	defer chain.Close()
 
-	if err := cmd.CLI(chain); err != nil {
-		fmt.Println(err)
+	switch {
+	case len(*web) > 0:
+		cmd.Web(*web, chain)
+	default:
+		if err := cmd.CLI(chain); err != nil {
+			fmt.Println(err)
+		}
 	}
 }
