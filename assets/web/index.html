@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chat 2 Data</title>
+    <!-- 引入 Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <!-- 引入自定义样式文件 -->
+    <link rel="stylesheet" href="web/css/styles.css"/>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div style="text-align:center;">
+        <img src="https://readme-typing-svg.demolab.com/?lines=Chat+2+Data&size=50&height=80&center=true&vCenter=true&&duration=1000&pause=20000">
+    </div>
+
+    <h6 class="center-align">使用自然语言和数据库对话</h6>
+    <div class="border_content">
+        <p>
+            <span class="note">使用技巧：</span>1. 问题要尽量清晰明确 2. 问题中包含的信息(比如表名，字段名)越多回答越准确
+        </p>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="search-text" type="text" class="validate"/>
+            <label for="search-text">输入问题</label>
+            <div class="preset-queries">
+                <span>示例：</span>
+                <br> <!-- 添加换行符 -->
+            </div>
+            <div class="preset-buttons">
+                <button class="preset-btn">返回所有表</button>
+                <button class="preset-btn">哪个表的数据最多</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 center-align">
+            <button id="search-btn" class="btn waves-effect waves-light">搜索</button>
+        </div>
+    </div>
+
+    <div id="loading" class="row center-align" style="display:none;">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle">
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="results" class="row" style="display:none;">
+        <div class="col s12">
+            <div id="results-container"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 引入 jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- 引入 Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- 引入 自定义JavaScript文件 -->
+<script type="text/javascript" src="web/js/main.js"></script>
+
+</body>
+
+</html>
