@@ -2,10 +2,19 @@
             <img src="https://readme-typing-svg.demolab.com/?lines=Chat+2+Data&size=50&height=80&center=true&vCenter=true&&duration=1000&pause=5000">
         </div>
 
-> Use AI to chat to your mysql, postgre, sqlite3 database or csv.
-
+> Chat2Data is a tool that uses AI to facilitate interaction with your MySQL, PostgreSQL, SQLite3 databases.
+## Feature
+* 🗣 Easy Interaction: Chat2Data lets you chat with your databases, making it intuitive to use.
+* 🔗 Multiple Databases: It supports MySQL, PostgreSQL, SQLite3, and CSV files.
+* 🐳 Docker Support: It provides a Docker image for easy deployment.
+* 💻 CLI and Web UI: It offers both a command line and a web interface.
+* ⚙️ Simple Installation: It's easy to install with Go command.
+* 🧠 AI Integration: It leverages OpenAI API for advanced natural language processing.
+ 
 ## Preview
-![](doc/preview.jpg)
+![CLI](doc/cli.jpg)
+
+![Web UI](doc/web-ui.png)
 
 ## Quick Run(Docker)
 ```bash
@@ -50,7 +59,7 @@ docker build -t chat2data .
 - [x] Support Docker
 - [x] Support Postgre Database
 - [x] Support load csv
-- [ ] Add Web ui
+- [x] Add Web ui
 
 ## [Change Log](CHANGELOG.md)
 
