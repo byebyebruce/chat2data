@@ -60,6 +60,8 @@ docker build -t chat2data .
 - [x] Support Postgre Database
 - [x] Support load csv
 - [x] Add Web ui
+- [ ] Local vector database
+- [ ] Doc QA
 
 ## [Change Log](CHANGELOG.md)
 
