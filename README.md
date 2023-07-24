@@ -2,7 +2,7 @@
    <img src="https://readme-typing-svg.demolab.com/?lines=Chat+2+Data&size=50&height=80&center=true&vCenter=true&&duration=1000&pause=5000">
 </div>
 
-> 🗣 📊Chat2Data is a user-friendly tool for interacting with databases, supporting MySQL, PostgreSQL, SQLite3, and CSV files
+> 🗣 📊Chat2Data is tool for interacting with databases, supporting MySQL, PostgreSQL, SQLite3, and CSV files
 ## Feature
 * 🗣 Easy Interaction: Chat2Data lets you chat with your databases, making it intuitive to use.
 * 🔗 Multiple Databases: It supports MySQL, PostgreSQL, SQLite3, and CSV files.
