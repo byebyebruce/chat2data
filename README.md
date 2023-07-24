@@ -1,3 +1,8 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/byebyebruce/chat2data)](https://goreportcard.com/report/github.com/byebyebruce/chat2data)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/byebyebruce/chat2data)
+[![Docker Pulls](https://img.shields.io/docker/pulls/bailu1901/chat2data)](https://hub.docker.com/r/bailu1901/chat2data/)
+
+
  <div align="center">
    <img src="https://readme-typing-svg.demolab.com/?lines=Chat+2+Data&size=50&height=80&center=true&vCenter=true&&duration=1000&pause=5000">
 </div>
