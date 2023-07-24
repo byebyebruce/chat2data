@@ -1,0 +1,77 @@
+name: Release
+
+on:
+  push:
+    tags: [ 'v*' ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        build: [ macos, linux, windows ]
+        include:
+          - build: macos
+            os: macos-latest
+            release_suffix: macos
+          - build: linux
+            os: ubuntu-latest
+            release_suffix: linux
+          - build: windows
+            os: windows-latest
+            release_suffix: windows
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set Up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+
+      - name: Download Dependencies
+        run: go mod download
+
+      - run: mkdir dist
+
+      - name: Build Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          uname -a
+          make build
+          export GOARCH=amd64
+          tar czvf chat2data-linux-amd64.tar.gz chat2data
+          mv chat2data-linux-amd64.tar.gz dist/
+
+      - name: Build Mac
+        if: matrix.os == 'macos-latest'
+        run: |
+          make build
+          export GOARCH=amd64
+          tar czvf chat2data-darwin-amd64.tar.gz chat2data
+          mv chat2data-darwin-amd64.tar.gz dist/
+
+      - name: Build Windows
+        if: matrix.os == 'windows-latest'
+        run: |
+          make build
+          tar czvf chat2data-windows-amd64.tar.gz chat2data
+          mv chat2data-windows-amd64.tar.gz dist/
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: "startsWith(github.ref, 'refs/tags/')"
+        with:
+          files: |
+            dist/chat2data*
+          generate_release_notes: true
