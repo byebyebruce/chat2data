@@ -36,7 +36,7 @@ Ask: `Which is the highest happiness country?`
 
 * Docker
 ```bash
-docker run --rm -it -e OPENAI_API_KEY=xxx -p 8088:8088 bailu1901/chat2data html 'https://github.com/byebyebruce/chat2data
+docker run --rm -it -e OPENAI_API_KEY=xxx -p 8088:8088 bailu1901/chat2data html 'https://github.com/byebyebruce/chat2data'
 ```
 Open `http://localhost:8088` in browser, then ask: `What is the feature of chat2data?`
 
