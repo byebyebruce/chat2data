@@ -1,8 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"context"
+	"crypto/md5"
 	"fmt"
+	"os"
+	"path"
 	"time"
 
 	"github.com/byebyebruce/chat2data/htmlloader"
@@ -14,6 +18,8 @@ import (
 	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/schema"
 )
+
+const dbFile = "chat2data.tmp"
 
 func htmlCMD(llm llms.LanguageModel) *cobra.Command {
 	printDocsFlag := false
@@ -47,11 +53,12 @@ func htmlCMD(llm llms.LanguageModel) *cobra.Command {
 			return err
 		}
 
-		const dbFile = "local_vector.db"
-		db, err := localvectordb.New(dbFile)
+		tmpFile := path.Join(os.TempDir(), dbFile)
+		db, err := localvectordb.New(tmpFile)
 		if err != nil {
 			return err
 		}
+		fmt.Println("load cache db file", tmpFile)
 		defer db.Close()
 
 		store, err := db.Get(e, url, 0)
@@ -62,8 +69,21 @@ func htmlCMD(llm llms.LanguageModel) *cobra.Command {
 		if err != nil {
 			return err
 		}
+		needRefresh := false
 		if len(oldDocs) != len(docs) {
-			//refresh
+			needRefresh = true
+		} else {
+			for i, doc := range oldDocs {
+				oldmd5 := md5.Sum([]byte(doc.PageContent))
+				newmd5 := md5.Sum([]byte(docs[i].PageContent))
+				if bytes.Equal(oldmd5[:], newmd5[:]) == false {
+					needRefresh = true
+					break
+				}
+			}
+		}
+
+		if needRefresh {
 			err := db.Delete(url)
 			if err != nil {
 				return err
