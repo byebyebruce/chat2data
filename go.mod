@@ -3,7 +3,7 @@ module github.com/byebyebruce/chat2data
 go 1.19
 
 require (
-	github.com/JohannesKaufmann/html-to-markdown v1.4.1
+	github.com/JohannesKaufmann/html-to-markdown v1.4.0
 	github.com/boltdb/bolt v1.3.1
 	github.com/fatih/color v1.15.0
 	github.com/go-shiori/go-readability v0.0.0-20230421032831-c66949dfc0ad
