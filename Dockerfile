@@ -16,13 +16,11 @@ RUN make build
 
 FROM alpine
 
-#RUN apk --no-cache add tzdata libc6-compat libgcc libstdc++
-
 WORKDIR /app
 
 COPY --from=builder /src/chat2data ./chat2data
 
-EXPOSE 8082
+EXPOSE 8088
 
 ENTRYPOINT ["./chat2data"]
 
