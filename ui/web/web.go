@@ -1,4 +1,4 @@
-package cmd
+package web
 
 import (
 	"context"
@@ -9,18 +9,18 @@ import (
 	"io/fs"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
-	"github.com/byebyebruce/chat2data/assets"
-	"github.com/byebyebruce/chat2data/datachain"
+	"github.com/byebyebruce/chat2data/qa"
+	"github.com/byebyebruce/chat2data/ui/web/assets"
 	"github.com/fatih/color"
 )
 
-func Web(addr string, chain *datachain.DataChain) {
+func Web(addr string, qa qa.QA, info any) error {
 	f, err := fs.Sub(assets.Web, "web")
 	if err != nil {
-		printError(err)
-		return
+		return err
 	}
 	http.Handle("/web/", http.StripPrefix("/web/", http.FileServer(http.FS(f))))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -29,7 +29,7 @@ func Web(addr string, chain *datachain.DataChain) {
 			printError(err)
 			return
 		}
-		if err := tmpl.Execute(w, nil); err != nil {
+		if err := tmpl.Execute(w, info); err != nil {
 			printError(err)
 			return
 		}
@@ -52,7 +52,7 @@ func Web(addr string, chain *datachain.DataChain) {
 		defer cancel()
 
 		log.Println("SearchText:", req.SearchText)
-		answer, err := chain.Run(ctx, req.SearchText)
+		answer, err := qa.Answer(ctx, req.SearchText)
 		if err != nil {
 			printError(err)
 			return
@@ -64,12 +64,10 @@ func Web(addr string, chain *datachain.DataChain) {
 		}
 	})
 
-	host := fmt.Sprintf("http://localhost:%s", addr)
+	host := fmt.Sprintf("http://localhost:%s", strings.Split(addr, ":")[1])
 	fmt.Println(color.GreenString("web"), color.GreenString(host))
 
-	if err := http.ListenAndServe(":"+addr, nil); err != nil {
-		log.Fatal(err)
-	}
+	return http.ListenAndServe(addr, nil)
 }
 
 func printError(err error) {

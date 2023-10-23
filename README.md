@@ -7,7 +7,7 @@
    <img src="https://readme-typing-svg.demolab.com/?lines=Chat+2+Data&size=50&height=80&center=true&vCenter=true&&duration=1000&pause=5000">
 </div>
 
-> 🗣 📊Chat2Data is tool for interacting with databases, supporting MySQL, PostgreSQL, SQLite3, and CSV files
+> 🗣 📊Chat2Data is tool for interacting with databases, supporting MySQL, PostgreSQL, SQLite3, and CSV files, HTML page.
 ## Feature
 * 🗣 Easy Interaction: Chat2Data lets you chat with your databases, making it intuitive to use.
 * 🔗 Multiple Databases: It supports MySQL, PostgreSQL, SQLite3, and CSV files.
@@ -18,7 +18,6 @@
  
 ## Preview
 ![CLI](doc/cli.jpg)
-
 ![Web UI](doc/web-ui.png)
 
 ## Install
@@ -31,30 +30,39 @@
 ## Quick Run
 * Binary
 ```bash
-OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb
+OPENAI_API_KEY=xxx ./chat2data db -c ./testdata/world_happiness_2015.db
 ```
+Ask: `Which is the highest happiness country?`
+
 * Docker
 ```bash
-docker run --rm -it -e OPENAI_API_KEY=xxx bailu1901/chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb
+docker run --rm -it -e OPENAI_API_KEY=xxx -p 8088:8088 bailu1901/chat2data html 'https://github.com/byebyebruce/chat2data
 ```
+Open `http://localhost:8088` in browser, then ask: `What is the feature of chat2data?`
 
 ## Config
-   * Use local `.env` file `cp .env.template .env` then edit it.  
+   * Use local `.env` file `./cp .env.template .env` then edit it.  
    * You can also use `export OPENAI_API_KEY=xxx` to specify the environment variables.
-   * Or run with env `OPENAI_API_KEY=xxx OPENAI_BASE_URL=https://api.openai.com chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
+   * Or run with env `OPENAI_API_KEY=xxx OPENAI_BASE_URL=https://api.openai.com ./chat2data db root:pwd@tcp(localhost:3306)/mydb`
     
-## Command
+## Usage
+* help `./chat2data --help`  
+global flags
+```bash
+      --web  -w  web ui port
+      --cli  -c  cli mode
+```
 1. Run CLI(command line interface)
-   * help `chat2data --help`
-   * mysql `chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb` 
-   * postgre `chat2data --postgre=postgres://db_user:mysecretpassword@localhost:5438/test?sslmode=disable`
-   * sqlite3 `chat2data --sqlite3=mytest.db`
-   * csv `chat2data --csv=csvfile.csv` or `chat2data --csv=csvdir`
-   * with env `OPENAI_API_KEY=xxx chat2data --mysql=root:pwd@tcp(localhost:3306)/mydb`
-   * 
+   * mysql `./chat2data db -c root:pwd@tcp(localhost:3306)/mydb` 
+   * postgre `./chat2data db -c postgres://db_user:mysecretpassword@localhost:5438/test?sslmode=disable`
+   * sqlite3 `./chat2data db -c ./sqlite.db`
+   * csv `./chat2data csv -c ./csvfile.csv` or `./chat2data csv ./csvdir`
+   * html `./chat2data html -c https://github.com/byebyebruce/chat2data`
+   * with env `OPENAI_API_KEY=xxx chat2data db -c root:pwd@tcp(localhost:3306)/mydb`
 2. Run Web UI
-   * mysql `chat2data --mysql="root:example@tcp(10.12.21.101:3306)/mydb" --web=8088`
-   * sqlite3 `chat2data --sqlite3=./mytest.db  --web=8088`
+   * mysql `./chat2data db root:example@tcp(10.12.21.101:3306)/mydb`
+   * html `./chat2data html https://github.com/byebyebruce/chat2data`
+   * sqlite3 `./chat2data db -w=:0.0.0.0:8088 ./mytest.db`
 
 ## Build 
 `git clone github.com/byebyebruce/chat2data`
@@ -72,8 +80,10 @@ docker build -t chat2data .
 - [x] Support Postgre Database
 - [x] Support load csv
 - [x] Add Web ui
-- [ ] Local vector database
+- [x] Local vector database
+- [x] Support load html
 - [ ] Doc QA
+- [ ] Beautiful CLI 
 
 ## [Change Log](CHANGELOG.md)
 

@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"database/sql"
@@ -8,15 +8,54 @@ import (
 	"sync"
 
 	"github.com/byebyebruce/chat2data/csv_importer"
+	"github.com/byebyebruce/chat2data/qa"
+	"github.com/byebyebruce/chat2data/qa/dbchain"
 	"github.com/byebyebruce/chat2data/util"
 	"github.com/fatih/color"
 	"github.com/sourcegraph/conc/pool"
+	"github.com/spf13/cobra"
+	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/tools/sqldatabase/sqlite3"
 )
 
-// LoadCSV load csv to sqlite3 database
-func LoadCSV(dsn string, dirOrFile string) error {
-	db, err := sql.Open(sqlite3.EngineName, dsn)
+func csvCMD(llm llms.LanguageModel) *cobra.Command {
+	useAllTables := false
+	cmd := &cobra.Command{
+		Use:   "csv file|dir",
+		Short: "csv",
+	}
+	cmd.Flags().BoolVarP(&useAllTables, "all-tables", "a", false, "use all tables")
+	cmd.RunE = func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return cmd.Help()
+		}
+
+		var (
+			err error
+			qa  qa.QA
+		)
+		fileOrDir := args[0]
+		const tmpSQLiteFile = "./chat.db"
+		err = csv2SQLite(fileOrDir, tmpSQLiteFile)
+		if err != nil {
+			return err
+		}
+		defer os.Remove(tmpSQLiteFile)
+
+		qa, err = dbchain.New(llm, sqlite3.EngineName, tmpSQLiteFile, useAllTables)
+		if err != nil {
+			return err
+		}
+		dataSource := fmt.Sprintf("csv: %s", fileOrDir)
+		return runUI(qa, dataSource)
+	}
+
+	return cmd
+}
+
+// csv2SQLite load csv to sqlite3 database
+func csv2SQLite(dirOrFile string, outSQLiteFile string) error {
+	db, err := sql.Open(sqlite3.EngineName, outSQLiteFile)
 	if err != nil {
 		return err
 	}

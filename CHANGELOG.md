@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.5.0 - 2023-10-23
+### Features
+* support chat to html `chat2data html http://someurl`
+* change command mode
+ 
 ## v0.4.0 - 2023-07-18
 ### Features
 * add web ui `chat2data --csv=./testdata/csv/routes.csv --web=8088`
