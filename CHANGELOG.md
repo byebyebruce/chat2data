@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## v0.5.0 - 2023-10-23
+## v0.5.1 - 2023-10-23
 ### Features
-* support chat to html `chat2data html http://someurl`
+* support chat to html. e.g. `chat2data html http://someurl`
 * change command mode
  
 ## v0.4.0 - 2023-07-18

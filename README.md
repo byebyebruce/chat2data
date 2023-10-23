@@ -43,7 +43,7 @@ Open `http://localhost:8088` in browser, then ask: `What is the feature of chat2
 ## Config
    * Use local `.env` file `./cp .env.template .env` then edit it.  
    * You can also use `export OPENAI_API_KEY=xxx` to specify the environment variables.
-   * Or run with env `OPENAI_API_KEY=xxx OPENAI_BASE_URL=https://api.openai.com ./chat2data db root:pwd@tcp(localhost:3306)/mydb`
+   * Or run with env `OPENAI_API_KEY=xxx OPENAI_BASE_URL=https://api.openai.com/v1 ./chat2data db root:pwd@tcp(localhost:3306)/mydb`
     
 ## Usage
 * help `./chat2data --help`  
