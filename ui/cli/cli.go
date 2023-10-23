@@ -34,6 +34,9 @@ func CLI(qa qa.QA, info any) error {
 
 		str, err := pt.Run()
 		if err != nil {
+			if err == promptui.ErrInterrupt {
+				return nil
+			}
 			fmt.Println(err)
 			return err
 		}
