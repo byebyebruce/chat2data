@@ -1,3 +1,0 @@
-package docchain
-
-func A() {}
