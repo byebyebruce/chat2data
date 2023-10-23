@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"sync"
 
-	"github.com/byebyebruce/chat2data/csv_importer"
+	"github.com/byebyebruce/chat2data/csvimporter"
 	"github.com/byebyebruce/chat2data/qa"
 	"github.com/byebyebruce/chat2data/qa/dbchain"
 	"github.com/byebyebruce/chat2data/util"
@@ -88,7 +88,7 @@ func csv2SQLite(dirOrFile string, outSQLiteFile string) error {
 		for i, f := range fs {
 			_, f := i, f
 			p.Go(func() {
-				name, err := csv_importer.ImportCSV2DB(db, f)
+				name, err := csvimporter.ImportCSV2DB(db, f)
 				mu.Lock()
 				defer mu.Unlock()
 				if err != nil {

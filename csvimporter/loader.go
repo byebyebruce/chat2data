@@ -1,4 +1,4 @@
-package csv_importer
+package csvimporter
 
 import (
 	"bytes"
