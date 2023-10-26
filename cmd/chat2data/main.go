@@ -14,14 +14,6 @@ import (
 )
 
 var (
-	mysqlDSN    = flag.String("mysql", "", "mysql dsn (e.g. user:pwd@tcp(localhost:3306)/test)")
-	sqlite3DSN  = flag.String("sqlite3", "", "sqlite3 dsn (e.g. test.db)")
-	pgxDSN      = flag.String("postgre", "", "postgre dsn (e.g. postgres://db_user:mysecretpassword@localhost:5438/test?sslmode=disable)")
-	csv         = flag.String("csv", "", "csv dir or file")
-	useAllTable = flag.Bool("all", true, "use all table or choose by question")
-	web         = flag.String("web", "", "web ui port")
-)
-var (
 	webAddr string
 	cliMode bool
 )
@@ -46,49 +38,16 @@ func main() {
 	rootCmd.AddCommand(
 		dbCMD(llm),
 		csvCMD(llm),
+		docCMD(llm),
+		cleanDocCacheCMD(),
+		textCMD(llm),
 		htmlCMD(llm),
+		pdfCMD(llm),
 	)
 
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatalf("rootCmd err: %s", err)
 	}
-
-	/*
-		var chain *dbchain.DBChain
-		if *sqlite3DSN != "" {
-			chain, err = dbchain.New(llm, sqlite3.EngineName, *sqlite3DSN, *useAllTable)
-		} else if *mysqlDSN != "" {
-			chain, err = dbchain.New(llm, mysql.EngineName, *mysqlDSN, *useAllTable)
-		} else if *pgxDSN != "" {
-			chain, err = dbchain.New(llm, postgresql.EngineName, *pgxDSN, *useAllTable)
-		} else if *csv != "" {
-			dbFile := path.Join(os.TempDir(), "chat2data.db")
-			os.Remove(dbFile)
-			defer os.Remove(dbFile)
-			err = cmd.LoadCSV(dbFile, *csv)
-			if err != nil {
-				log.Fatalf("load csv err: %s", err)
-			}
-			chain, err = dbchain.New(llm, sqlite3.EngineName, dbFile, *useAllTable)
-		} else {
-			log.Fatalf("no dsn")
-		}
-		if err != nil {
-			log.Fatalf("open database err: %s", err)
-		}
-
-		defer chain.Close()
-
-		switch {
-		case len(*web) > 0:
-			web2.Web(*web, chain)
-		default:
-			if err := cmd.CLI(chain); err != nil {
-				fmt.Println(err)
-			}
-		}
-
-	*/
 }
 
 func runUI(qa qa.QA, info any) error {

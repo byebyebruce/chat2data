@@ -1,28 +1,35 @@
 # CHANGELOG
 
+## v0.5.2 - 2023-10-26
+### Features
+* Support txt/pdf
+* Choose doc to chat
+### Fix
+* Compare local cache
+ 
 ## v0.5.1 - 2023-10-23
 ### Features
-* support chat to html. e.g. `chat2data html http://someurl`
-* change command mode
+* Support chat to html. 
+* Change command mode
  
 ## v0.4.0 - 2023-07-18
 ### Features
-* add web ui `chat2data --csv=./testdata/csv/routes.csv --web=8088`
+* Add web ui 
  
 ## v0.2.8 - 2023-07-11
 ### Features
-* add csv support
+* Add csv support
 ### Fixed
-* all table mode panic
+* All table mode panic
  
 ## v0.2.0 - 2023-07-10 
 ### Features
-* add postgre support
-* add docker support
+* Add postgre support
+* Add docker support
 ### Fixed
-* load .env error 
+* Load .env error 
 
 ## v0.1.0 - 2023-07-04
 ### Features
-* add sqlite3 support
-* add mysql support
+* Add sqlite3 support
+* Add mysql support

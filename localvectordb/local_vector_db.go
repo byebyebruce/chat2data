@@ -127,6 +127,11 @@ func (s Store) AddDocuments(ctx context.Context, documents []schema.Document, op
 		}
 		if document.Metadata != nil {
 			doc.Meta, _ = json.Marshal(document.Metadata)
+			id, ok := GetMetaID(document.Metadata)
+			if ok {
+				// 为了得到稳定的排序
+				doc.Id = id
+			}
 		}
 		docs = append(docs, doc)
 	}
@@ -226,11 +231,37 @@ func (s Store) Docs() ([]schema.Document, error) {
 			if err := proto.Unmarshal(v, &d); err != nil {
 				return err
 			}
-			ns = append(ns, schema.Document{PageContent: d.Content})
+			var m map[string]interface{}
+			if len(d.Meta) > 0 {
+				json.Unmarshal(d.Meta, &m)
+			}
+			ns = append(ns, schema.Document{PageContent: d.Content, Metadata: m})
 			return nil
 		})
 
 		return nil
 	})
 	return ns, err
+}
+
+func PutMetaID(m *map[string]any, id string) {
+	if *m == nil {
+		*m = make(map[string]any)
+	}
+	(*m)["_id"] = id
+}
+
+func GetMetaID(m map[string]any) (string, bool) {
+	if m == nil {
+		return "", false
+	}
+	if a, ok := m["_id"]; !ok {
+		return "", false
+	} else {
+		id, ok := a.(string)
+		if !ok {
+			return "", false
+		}
+		return id, true
+	}
 }
