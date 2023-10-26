@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v0.5.2 - 2023-10-26
+## v0.5.3 - 2023-10-26
 ### Features
 * Support txt/pdf
 * Choose doc to chat
