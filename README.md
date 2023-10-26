@@ -9,12 +9,13 @@
 
 > 🗣 📊 Chat2Data is a tool for interacting with your data, including MySQL, PostgreSQL, SQLite3, CSV, Text, PDF, and HTML pages.
 ## Feature
-🗣 Easy Interaction: Chat2Data allows you to chat with your data, making it intuitive to use.
-🔗 Multiple Databases: It supports MySQL, PostgreSQL, SQLite3, CSV, Text, PDF, and HTML pages.
-🐳 Docker Support: It provides a Docker image for easy deployment.
-💻 CLI and Web UI: It offers both a command line and a web interface.
-⚙️ Simple Installation: It's easy to install with a Go command.
-🧠 AI Integration: It leverages the OpenAI API for advanced natural language processing. 
+* 🗣 Easy Interaction: Chat2Data allows you to chat with your data, making it intuitive to use.
+* 🔗 Multiple Databases: It supports MySQL, PostgreSQL, SQLite3, CSV, Text, PDF, and HTML pages.
+* 🐳 Docker Support: It provides a Docker image for easy deployment.
+* 💻 CLI and Web UI: It offers both a command line and a web interface.
+* ⚙️ Simple Installation: It's easy to install with a Go command.
+* 🧠 AI Integration: It leverages the OpenAI API for advanced natural language processing. 
+ 
 ## Preview
 ![CLI](doc/cli.jpg)
 ![Web UI](doc/web-ui.png)
